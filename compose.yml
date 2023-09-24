@@ -1,5 +1,7 @@
 volumes:
   database_data:
+networks:
+  me2gift_internal:
 services:
   backend:
     image: me2gift/backend
@@ -7,6 +9,24 @@ services:
     build: .
     ports:
       - 3000:3000
+    depends_on:
+      - database
+    networks:
+      - me2gift_internal
+  dev:
+    image: me2gift/backend
+    container_name: me2gift-dev
+    build: .
+    tty: true
+    ports:
+      - 3000:3000
+    depends_on:
+      - database
+    networks:
+      - me2gift_internal
+    volumes:
+      - .:/tmp/me2gift
+    entrypoint: ['/bin/bash']
   database:
     image: postgres:16
     container_name: me2gift-database
@@ -16,3 +36,5 @@ services:
       - database_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
+    networks:
+      - me2gift_internal
