@@ -1,4 +1,3 @@
-import { DataSource } from 'typeorm';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -12,6 +11,7 @@ import { ProductsModule } from './modules/products/products.module';
     TypeOrmModule.forRoot({
       ...databaseConnection,
     }),
+
     UsersModule,
     ProductsModule
   ],

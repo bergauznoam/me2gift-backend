@@ -7,8 +7,10 @@ import {
     BeforeInsert
 } from 'typeorm';
 import {
+    IsEmail,
     IsNotEmpty,
     IsString,
+    IsBoolean,
 } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 
@@ -23,18 +25,23 @@ export class User {
     @Column()
     @IsString()
     @IsNotEmpty()
-    username: string;
+    @IsEmail()
+    email: string;
 
     @Column()
     @IsString()
     @IsNotEmpty()
     password: string;
 
+    @Column({ default: false })
+    @IsBoolean()
+    isAdmin: boolean;
+
     @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
-    public created_at: Date;
+    public createdAt: Date;
 
     @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
-    public updated_at: Date;
+    public updatedAt: Date;
 
     @BeforeInsert()
     async hashPassword(): Promise<void> {
