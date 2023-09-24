@@ -13,5 +13,4 @@ export const databaseConnection: Partial<TypeOrmModuleOptions> = {
     database: appConfiguration.appName,
     entities: [User, Product],
     synchronize: true,
-    logging: true
 }
