@@ -1,8 +1,8 @@
 import { JwtService } from '@nestjs/jwt';
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { ADMIN_ROLE_KEY } from 'src/roles.decorator';
-import { User } from 'src/models/user.model';
+import { ADMIN_ROLE_KEY } from '@root/roles.decorator';
+import { User } from '@models/user.model';
 import { DataSource } from 'typeorm';
 
 @Injectable()

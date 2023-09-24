@@ -2,10 +2,10 @@ import { resolve } from 'path';
 
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
-import { User } from '../models/user.model';
-import { Product } from '../models/product.model';
-import { Category } from '../models/category.model';
-import { SubCategory } from '../models/subcategory.model';
+import { User } from '@models/user.model';
+import { Product } from '@models/product.model';
+import { Category } from '@models/category.model';
+import { SubCategory } from '@models/subcategory.model';
 
 import * as dotenv from "dotenv";
 dotenv.config({ path: resolve(__dirname, `../env/${process.env.NODE_ENV || 'development'}.env`), processEnv: process.env })

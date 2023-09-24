@@ -14,7 +14,7 @@ import {
 } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 
-import { appConfiguration } from '../configurations/app.conf';
+import { appConfiguration } from '@config/app.conf';
 
 
 @Entity({ name: "users" })

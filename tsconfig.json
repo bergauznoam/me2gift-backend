@@ -16,6 +16,21 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@root/*": ["./src/*"],
+
+      "@config/*": ["./src/configurations/*"],
+      "@guards/*": ["./src/guards/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@models/*": ["./src/models/*"],
+      "@services/*": ["./src/services/*"],
+      "@DTOs/*": ["./src/interfaces/dtos/*"],
+
+      "@users/*": ["./src/modules/users/*"],
+      "@categories/*": ["./src/modules/categories/*"],
+      "@subcategories/*": ["./src/modules/subcategories/*"],
+      "@products/*": ["./src/modules/products/*"],
+    }
   }
 }

@@ -3,8 +3,8 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { Category } from "src/models/category.model";
-import { InvalidCategoryId } from "src/exceptions";
+import { InvalidCategoryId } from "@root/exceptions";
+import { Category } from "@models/category.model";
 
 @Injectable()
 export class CategoriesService {

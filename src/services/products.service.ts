@@ -3,10 +3,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Product } from 'src/models/product.model';
-import { InvalidProductId } from 'src/exceptions';
-import { CreateProductDto } from 'src/interfaces/dtos/CreateProduct.dto';
-import { SubCategory } from 'src/models/subcategory.model';
+import { InvalidProductId } from '@root/exceptions';
+import { Product } from '@models/product.model';
+import { CreateProductDto } from '@interfaces/dtos/CreateProduct.dto';
+import { SubCategory } from '@models/subcategory.model';
 
 @Injectable()
 export class ProductsService {

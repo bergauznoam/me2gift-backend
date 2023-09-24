@@ -1,4 +1,4 @@
-import { IAppConfiguration } from "src/interfaces/IAppConfiguration";
+import { IAppConfiguration } from "@interfaces/IAppConfiguration";
 
 export const appConfiguration: IAppConfiguration = {
     appName: "me2gift",

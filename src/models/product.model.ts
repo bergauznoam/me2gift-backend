@@ -14,7 +14,7 @@ import {
     IsNumber,
     Min
 } from 'class-validator';
-import { SubCategory } from './subcategory.model';
+import { SubCategory } from '@models/subcategory.model';
 
 @Entity({ name: "products" })
 @Unique("name_subcategory_unique_constraint", ["name", "subCategory"])

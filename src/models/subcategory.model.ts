@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
-import { Category } from "./category.model";
-import { Product } from "./product.model";
+import { Category } from "@models/category.model";
+import { Product } from "@models/product.model";
 
 @Entity({ name: "subcategories" })
 @Unique("name_category_unique_constraint", ["name", "category"])

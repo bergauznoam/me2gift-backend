@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { SubCategory } from "src/models/subcategory.model";
+import { SubCategory } from "@models/subcategory.model";
 
 @Injectable()
 export class SubCategoriesService {
