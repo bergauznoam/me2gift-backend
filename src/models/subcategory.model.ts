@@ -1,14 +1,12 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { IsNotEmpty, IsString } from "class-validator";
+import { Column, Entity, ManyToOne, OneToMany, Unique } from "typeorm";
+import { BaseModel } from "@models/_base.model";
 import { Category } from "@models/category.model";
 import { Product } from "@models/product.model";
 
 @Entity({ name: "subcategories" })
 @Unique("name_category_unique_constraint", ["name", "category"])
-export class SubCategory {
-    @PrimaryGeneratedColumn()
-    id: number;
-
+export class SubCategory extends BaseModel {
     @Column()
     @IsString()
     @IsNotEmpty()

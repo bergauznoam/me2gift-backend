@@ -1,12 +1,10 @@
 import {
     Entity,
     Column,
-    PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
     Unique,
-    ManyToOne,
-    JoinColumn,
+    ManyToOne
 } from 'typeorm';
 import {
     IsNotEmpty,
@@ -14,14 +12,12 @@ import {
     IsNumber,
     Min
 } from 'class-validator';
+import { BaseModel } from "@models/_base.model";
 import { SubCategory } from '@models/subcategory.model';
 
 @Entity({ name: "products" })
 @Unique("name_subcategory_unique_constraint", ["name", "subCategory"])
-export class Product {
-    @PrimaryGeneratedColumn()
-    id: number;
-
+export class Product extends BaseModel {
     @Column()
     @IsString()
     @IsNotEmpty()
@@ -34,12 +30,6 @@ export class Product {
 
     @Column({ nullable: true })
     description: string;
-
-    @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
-    public createdAt: Date;
-
-    @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
-    public updatedAt: Date;
 
     @ManyToOne(type => SubCategory, subCategory => subCategory.products)
     subCategory: SubCategory;

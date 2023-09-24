@@ -3,33 +3,19 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { InvalidProductId } from '@root/exceptions';
 import { Product } from '@models/product.model';
 import { CreateProductDto } from '@interfaces/dtos/CreateProduct.dto';
 import { SubCategory } from '@models/subcategory.model';
+import { CRUDService } from '@services/crud.service';
 
 @Injectable()
-export class ProductsService {
+export class ProductsService extends CRUDService(Product) {
     constructor(
-        @InjectRepository(Product)
-        private productsRepository: Repository<Product>,
         @InjectRepository(SubCategory)
         private subCatergoriesRepository: Repository<SubCategory>,
-    ) { }
+    ) { super(); }
 
-    public getAllProducts(): Promise<Product[]> {
-        return this.productsRepository.find();
-    }
-
-    public async getProductById(id: string): Promise<Product> {
-        const product = await this.productsRepository.findOne({ where: { id: +id } });
-        if (!product) {
-            throw new InvalidProductId();
-        }
-        return product;
-    }
-
-    public async createProduct(createProductRequest: CreateProductDto): Promise<Product> {
+    public async create(createProductRequest: CreateProductDto): Promise<Product> {
         const subCategory = await this.subCatergoriesRepository.findOne({
             where: { id: createProductRequest.subCategoryId }
         });
@@ -42,34 +28,25 @@ export class ProductsService {
             product.description = createProductRequest.description;
             product.price = createProductRequest.price;
             product.subCategory = subCategory;
-            await this.productsRepository.save(product);
+            await this.repository.save(product);
             return product;
         } catch (e) {
             throw new ProductAlreadyExistsError();
         }
     }
 
-    public async updateProduct(id: string, createProductRequest: CreateProductDto): Promise<Product> {
+    public async update(id: string, createProductRequest: CreateProductDto): Promise<Product> {
         const subCategory = await this.subCatergoriesRepository.findOne({
             where: { id: createProductRequest.subCategoryId }
         });
         if (!subCategory) {
             throw new InvalidSubCategory();
         }
-        const product = await this.getProductById(id);
+        const product = await this.getById(id);
         product.description = createProductRequest.description;
         product.price = createProductRequest.price;
         product.subCategory = subCategory;
-        await this.productsRepository.save(product);
+        await this.repository.save(product);
         return product;
-    }
-
-    public async deleteProduct(id: string): Promise<boolean> {
-        const product = await this.getProductById(id);
-        if (!product) {
-            throw new InvalidProductId();
-        }
-        this.productsRepository.delete(product);
-        return true;
     }
 }

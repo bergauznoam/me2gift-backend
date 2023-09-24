@@ -4,21 +4,15 @@ export class InvalidUserPasswordError extends Error {
     }
 }
 
-export class InvalidProductId extends Error {
+export class InvalidIdError extends Error {
     constructor() {
-        super("Invalid product id");
+        super(`Invalid id`);
     }
 }
 
 export class ProductAlreadyExistsError extends Error {
     constructor() {
         super("Product name already exists");
-    }
-}
-
-export class InvalidCategoryId extends Error {
-    constructor() {
-        super("Invalid category Id");
     }
 }
 

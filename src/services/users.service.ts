@@ -6,17 +6,18 @@ import * as bcrypt from 'bcrypt';
 
 import { InvalidUserPasswordError } from '@root/exceptions';
 import { User } from '@models/user.model';
+import { CRUDService } from './crud.service';
 
 @Injectable()
-export class UsersService {
+export class UsersService extends CRUDService(User) {
     constructor(
         @InjectRepository(User)
         private readonly usersRepository: Repository<User>,
         private readonly jwtService: JwtService
-    ) { }
+    ) { super(); }
 
     public async createAdminUser(): Promise<void> {
-        let admin = await this.usersRepository.findOne({ where: { isAdmin: true } });
+        let admin = await this.repository.findOne({ where: { isAdmin: true } });
         if (!admin) {
             admin = new User();
             admin.email = "admin@me2gift.com";
@@ -27,7 +28,7 @@ export class UsersService {
     }
 
     public async authenticate(email: string, password: string): Promise<string> {
-        const user = await this.usersRepository.findOne({ where: { email: email } });
+        const user = await this.repository.findOne({ where: { email: email } });
         if (!user) {
             throw new InvalidUserPasswordError();
         }

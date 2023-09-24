@@ -13,19 +13,19 @@ export class ProductsController {
 
     @Get()
     public getAllProducts(): Promise<ProductDto[]> {
-        return this.productsService.getAllProducts();
+        return this.productsService.get();
     }
 
     @Get(':id')
     public getProduct(@Param('id') id: string) {
-        return this.productsService.getProductById(id);
+        return this.productsService.getById(id);
     }
 
     @Post()
     @ApiHeader({ name: 'x-access-token' })
     @AdminPermission()
     public createProduct(@Body() createProductRequest: CreateProductDto): Promise<ProductDto> {
-        return this.productsService.createProduct(createProductRequest);
+        return this.productsService.create(createProductRequest);
     }
 
     @Post(':id')
@@ -35,13 +35,13 @@ export class ProductsController {
         @Param('id') id: string,
         @Body() createProductRequest: CreateProductDto
     ): Promise<ProductDto> {
-        return this.productsService.updateProduct(id, createProductRequest);
+        return this.productsService.update(id, createProductRequest);
     }
 
     @Delete(':id')
     @ApiHeader({ name: 'x-access-token' })
     @AdminPermission()
-    public deleteProduct(@Param('id') id: string): Promise<boolean> {
-        return this.productsService.deleteProduct(id);
+    public deleteProduct(@Param('id') id: string): Promise<void> {
+        return this.productsService.delete(id);
     }
 }

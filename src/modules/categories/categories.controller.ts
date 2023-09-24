@@ -15,19 +15,19 @@ export class CategoriesController {
 
     @Get()
     public getCategories(): Promise<CategoryDto[]> {
-        return this.categoriesService.getAllCategories();
+        return this.categoriesService.get();
     }
 
     @Get(':id')
     public getCategoryById(@Param('id') id: string): Promise<CategoryDto> {
-        return this.categoriesService.getCategoryById(id);
+        return this.categoriesService.getById(id);
     }
 
     @Post()
     @ApiHeader({ name: 'x-access-token' })
     @AdminPermission()
     public createCategory(@Body() createCategoryRequest: CreateCategoryDto): Promise<CategoryDto> {
-        return this.categoriesService.createCategory(createCategoryRequest);
+        return this.categoriesService.create(createCategoryRequest);
     }
 
 
@@ -38,13 +38,13 @@ export class CategoriesController {
         @Param('id') id: string,
         @Body() createCategoryRequest: CreateCategoryDto
     ): Promise<CategoryDto> {
-        return this.categoriesService.updateCategory(id, createCategoryRequest);
+        return this.categoriesService.update(id, createCategoryRequest);
     }
 
     @Delete(':id')
     @ApiHeader({ name: 'x-access-token' })
     @AdminPermission()
     public deleteCategory(@Param('id') id: string): Promise<void> {
-        return this.categoriesService.deleteCategory(id);
+        return this.categoriesService.delete(id);
     }
 }
