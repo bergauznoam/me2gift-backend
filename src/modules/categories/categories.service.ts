@@ -8,6 +8,7 @@ import { InvalidCategoryId } from "src/exceptions";
 
 @Injectable()
 export class CategoriesService {
+
     constructor(
         @InjectRepository(Category)
         private categoriesRepository: Repository<Category>,
@@ -30,5 +31,17 @@ export class CategoriesService {
         category.name = createCategoryDto.name;
         await this.categoriesRepository.save(category);
         return category;
+    }
+
+    public async updateCategory(id: string, createCategoryDto: CreateCategoryDto): Promise<Category> {
+        const category = await this.getCategoryById(id);
+        category.name = createCategoryDto.name;
+        await this.categoriesRepository.save(category);
+        return category;
+    }
+
+    public async deleteCategory(id: string): Promise<void> {
+        const category = await this.getCategoryById(id);
+        await this.categoriesRepository.delete(category);
     }
 }
