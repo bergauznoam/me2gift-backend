@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { ApiHeader } from '@nestjs/swagger';
+import { ApiHeader, ApiTags } from '@nestjs/swagger';
 
 import { ProductsService } from './products.service';
 import { ProductDto } from 'src/interfaces/dtos/Product.dto';
@@ -7,6 +7,7 @@ import { CreateProductDto } from 'src/interfaces/dtos/CreateProduct.dto';
 import { AdminPermission } from 'src/roles.decorator';
 
 @Controller("products")
+@ApiTags("Products")
 export class ProductsController {
     constructor(private readonly productsService: ProductsService) { }
 

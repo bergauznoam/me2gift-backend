@@ -2,8 +2,10 @@ import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { LoginDto } from '../../interfaces/dtos/Login.dto';
 import { Response } from 'express';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller()
+@ApiTags("Users")
 export class UsersController {
 
     constructor(
