@@ -1,0 +1,18 @@
+volumes:
+  database_data:
+services:
+  backend:
+    image: me2gift/backend
+    container_name: me2gift
+    build: .
+    ports:
+      - 3000:3000
+  database:
+    image: postgres:16
+    container_name: me2gift-database
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+    volumes:
+      - database_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
