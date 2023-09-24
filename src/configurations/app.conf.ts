@@ -2,6 +2,6 @@ import { IAppConfiguration } from "src/interfaces/IAppConfiguration";
 
 export const appConfiguration: IAppConfiguration = {
     appName: "me2gift",
-    saltRounds: 10,
-    jwtSecret: "My-sUpEr-$ecrEt-Password1!"
+    saltRounds: process.env.PASSWORD_SALT_ROUNDS,
+    jwtSecret: process.env.JTW_SECRET
 }
