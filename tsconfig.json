@@ -18,8 +18,6 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@root/*": ["./src/*"],
-
       "@config/*": ["./src/configurations/*"],
       "@guards/*": ["./src/guards/*"],
       "@interfaces/*": ["./src/interfaces/*"],
@@ -31,6 +29,9 @@
       "@categories/*": ["./src/modules/categories/*"],
       "@subcategories/*": ["./src/modules/subcategories/*"],
       "@products/*": ["./src/modules/products/*"],
+
+      "@root/*": ["./src/*"],
+
     }
   }
 }

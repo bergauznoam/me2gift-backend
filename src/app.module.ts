@@ -1,3 +1,7 @@
+import { resolve } from 'path';
+import * as dotenv from "dotenv";
+dotenv.config({ path: resolve(__dirname, `./env/${process.env.NODE_ENV || 'development'}.env`), processEnv: process.env })
+
 import { APP_GUARD } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
