@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { SubCategory } from 'src/models/subcategory.model';
-import { SubCategoriesService } from './subcategories.service';
+import { SubCategoriesService } from '../../services/subcategories.service';
 import { SubCategoriesController } from './subcategories.controller';
 
 @Module({

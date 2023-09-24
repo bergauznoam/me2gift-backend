@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
 
-import { ProductsService } from './products.service';
+import { ProductsService } from '../../services/products.service';
 import { ProductDto } from 'src/interfaces/dtos/Product.dto';
 import { CreateProductDto } from 'src/interfaces/dtos/CreateProduct.dto';
 import { AdminPermission } from 'src/roles.decorator';

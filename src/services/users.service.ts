@@ -5,8 +5,8 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
 
-import { User } from '../../models/user.model';
-import { InvalidUserPasswordError } from '../../exceptions';
+import { User } from '../models/user.model';
+import { InvalidUserPasswordError } from '../exceptions';
 
 @Injectable()
 export class UsersService {

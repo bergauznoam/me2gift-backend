@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
 import { CategoryDto } from 'src/interfaces/dtos/Category.dto';
-import { CategoriesService } from './categories.service';
+import { CategoriesService } from '../../services/categories.service';
 import { AdminPermission } from 'src/roles.decorator';
 import { CreateCategoryDto } from 'src/interfaces/dtos/CreateCategory.dto';
 

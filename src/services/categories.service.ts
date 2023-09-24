@@ -1,4 +1,4 @@
-import { CreateCategoryDto } from '../../interfaces/dtos/CreateCategory.dto';
+import { CreateCategoryDto } from '../interfaces/dtos/CreateCategory.dto';
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
