@@ -3,3 +3,9 @@ export class InvalidUserPasswordError extends Error {
         super("Invalid user or password");
     }
 }
+
+export class InvalidProductId extends Error {
+    constructor() {
+        super("Invalid product id");
+    }
+}
