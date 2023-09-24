@@ -15,3 +15,15 @@ export class ProductAlreadyExistsError extends Error {
         super("Product name already exists");
     }
 }
+
+export class InvalidCategoryId extends Error {
+    constructor() {
+        super("Invalid category Id");
+    }
+}
+
+export class InvalidSubCategory extends Error {
+    constructor() {
+        super("Sub category doesn't exist");
+    }
+}

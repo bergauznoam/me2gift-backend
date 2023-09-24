@@ -5,6 +5,8 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     Unique,
+    ManyToOne,
+    JoinColumn,
 } from 'typeorm';
 import {
     IsNotEmpty,
@@ -12,9 +14,10 @@ import {
     IsNumber,
     Min
 } from 'class-validator';
+import { SubCategory } from './subcategory.model';
 
 @Entity({ name: "products" })
-@Unique("name_unique_constraint", ["name"])
+@Unique("name_subcategory_unique_constraint", ["name", "subCategory"])
 export class Product {
     @PrimaryGeneratedColumn()
     id: number;
@@ -37,4 +40,7 @@ export class Product {
 
     @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
     public updatedAt: Date;
+
+    @ManyToOne(type => SubCategory, subCategory => subCategory.products)
+    subCategory: SubCategory;
 }

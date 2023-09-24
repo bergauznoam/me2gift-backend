@@ -11,4 +11,8 @@ export class CreateProductDto {
     @IsNumber()
     @Min(0)
     price: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    subCategoryId: number;
 }
