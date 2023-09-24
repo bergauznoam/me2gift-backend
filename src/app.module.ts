@@ -5,6 +5,8 @@ import { databaseConnection } from './configurations/database.conf';
 
 import { UsersModule } from './modules/users/users.module';
 import { ProductsModule } from './modules/products/products.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './guards/roles.guard';
 
 @Module({
   imports: [
@@ -16,6 +18,9 @@ import { ProductsModule } from './modules/products/products.module';
     ProductsModule
   ],
   controllers: [],
-  providers: [],
+  providers: [{
+    provide: APP_GUARD,
+    useClass: RolesGuard,
+  },],
 })
 export class AppModule { }
