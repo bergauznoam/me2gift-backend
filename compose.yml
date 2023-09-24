@@ -1,7 +1,5 @@
 volumes:
   database_data:
-networks:
-  me2gift_internal:
 services:
   backend:
     image: me2gift/backend
@@ -11,8 +9,6 @@ services:
       - 3000:3000
     depends_on:
       - database
-    networks:
-      - me2gift_internal
   dev:
     image: me2gift/backend
     container_name: me2gift-dev
@@ -22,8 +18,6 @@ services:
       - 3000:3000
     depends_on:
       - database
-    networks:
-      - me2gift_internal
     volumes:
       - .:/tmp/me2gift
     entrypoint: ['/bin/bash']
@@ -31,10 +25,10 @@ services:
     image: postgres:16
     container_name: me2gift-database
     environment:
-      - POSTGRES_PASSWORD=mysecretpassword
+      POSTGRES_DB: me2gift
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     volumes:
       - database_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-    networks:
-      - me2gift_internal

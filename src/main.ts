@@ -4,6 +4,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api', { exclude: ['docs'] });
   const config = new DocumentBuilder()
     .setTitle('Me2Gift')
     .setDescription('Me2Gift API Documentation')
