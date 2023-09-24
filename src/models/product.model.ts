@@ -4,14 +4,17 @@ import {
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
+    Unique,
 } from 'typeorm';
 import {
     IsNotEmpty,
     IsString,
-    IsNumber
+    IsNumber,
+    Min
 } from 'class-validator';
 
 @Entity({ name: "products" })
+@Unique("name_unique_constraint", ["name"])
 export class Product {
     @PrimaryGeneratedColumn()
     id: number;
@@ -23,6 +26,7 @@ export class Product {
 
     @Column()
     @IsNumber()
+    @Min(0)
     price: number;
 
     @Column({ nullable: true })

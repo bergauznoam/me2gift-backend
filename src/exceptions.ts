@@ -9,3 +9,9 @@ export class InvalidProductId extends Error {
         super("Invalid product id");
     }
 }
+
+export class ProductAlreadyExistsError extends Error {
+    constructor() {
+        super("Product name already exists");
+    }
+}
