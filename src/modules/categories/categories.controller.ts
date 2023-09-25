@@ -16,7 +16,6 @@ export class CategoriesController {
     @Get()
     public async getCategories(): Promise<CategoryDto[]> {
         const categories = await this.categoriesService.get();
-        console.log(categories)
         return categories.map(c => c.format());
     }
 
