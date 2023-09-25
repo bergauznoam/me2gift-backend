@@ -4,6 +4,7 @@ import { ApiHeader, ApiTags } from '@nestjs/swagger';
 import { SubCategoryDto, UpdateSubCategory } from '@DTOs/SubCategory.dto';
 import { CreateSubCategory } from '@DTOs/SubCategory.dto';
 import { AdminPermission } from '@root/roles.decorator';
+import { appConfiguration } from '@config/app.conf';
 
 @Controller("subcategories")
 @ApiTags("SubCategories")
@@ -26,7 +27,7 @@ export class SubCategoriesController {
     }
 
     @Post()
-    @ApiHeader({ name: 'x-access-token' })
+    @ApiHeader({ name: appConfiguration.jwtAccessTokenHeaderName })
     @AdminPermission()
     public async createSubCategory(
         @Body() createRequest: CreateSubCategory
@@ -36,7 +37,7 @@ export class SubCategoriesController {
     }
 
     @Put(':id')
-    @ApiHeader({ name: 'x-access-token' })
+    @ApiHeader({ name: appConfiguration.jwtAccessTokenHeaderName })
     @AdminPermission()
     public async updateSubcategory(
         @Param('id') id: string,
@@ -47,7 +48,7 @@ export class SubCategoriesController {
     }
 
     @Delete(':id')
-    @ApiHeader({ name: 'x-access-token' })
+    @ApiHeader({ name: appConfiguration.jwtAccessTokenHeaderName })
     @AdminPermission()
     public deleteProduct(@Param('id') id: string): Promise<void> {
         return this.subCategoriesService.delete(id);

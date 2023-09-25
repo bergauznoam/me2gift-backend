@@ -3,6 +3,7 @@ import { UsersService } from '@services/users.service';
 import { LoginDto, ResetPasswordDto } from '@DTOs/User.dto';
 import { Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
+import { appConfiguration } from '@config/app.conf';
 
 @Controller()
 @ApiTags("Users")
@@ -18,7 +19,7 @@ export class UsersController {
         @Res() response: Response
     ): Promise<Response> {
         const accessToken = await this.usersService.authenticate(loginRequest.email, loginRequest.password);
-        return response.set({ 'x-access-token': accessToken }).status(HttpStatus.OK).send();
+        return response.set({ [appConfiguration.jwtAccessTokenHeaderName]: accessToken }).status(HttpStatus.OK).send();
     }
 
 

@@ -13,6 +13,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 import { AppModule } from '@root/app.module';
 import { CustomExceptionFilter } from '@root/exception.filter';
+import { appConfiguration } from '@config/app.conf';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -22,6 +23,9 @@ async function bootstrap() {
         "https://localhost:3000",
         "http://localhost:3001",
         "https://localhost:3001"
+      ],
+      exposedHeaders: [
+        appConfiguration.jwtAccessTokenHeaderName
       ],
       credentials: true,
       optionsSuccessStatus: 200

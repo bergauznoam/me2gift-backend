@@ -4,6 +4,7 @@ import { Reflector } from '@nestjs/core';
 import { ADMIN_ROLE_KEY } from '@root/roles.decorator';
 import { User } from '@models/user.model';
 import { DataSource } from 'typeorm';
+import { appConfiguration } from '@config/app.conf';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -22,7 +23,7 @@ export class RolesGuard implements CanActivate {
             return true;
         }
         const request = context.switchToHttp().getRequest();
-        const accessToken = request.headers['x-access-token'];
+        const accessToken = request.headers[appConfiguration.jwtAccessTokenHeaderName];
         if (!accessToken) {
             return false;
         }

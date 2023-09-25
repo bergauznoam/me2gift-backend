@@ -5,6 +5,7 @@ import { ProductsService } from '@services/products.service';
 import { ProductDto, UpdateProductDto } from '@DTOs/Product.dto';
 import { CreateProductDto } from '@DTOs/Product.dto';
 import { AdminPermission } from '@root/roles.decorator';
+import { appConfiguration } from '@config/app.conf';
 
 @Controller("products")
 @ApiTags("Products")
@@ -34,7 +35,7 @@ export class ProductsController {
     }
 
     @Post()
-    @ApiHeader({ name: 'x-access-token' })
+    @ApiHeader({ name: appConfiguration.jwtAccessTokenHeaderName })
     @AdminPermission()
     public async createProduct(@Body() createRequest: CreateProductDto): Promise<ProductDto> {
         const product = await this.productsService.create(createRequest);
@@ -42,7 +43,7 @@ export class ProductsController {
     }
 
     @Put(':id')
-    @ApiHeader({ name: 'x-access-token' })
+    @ApiHeader({ name: appConfiguration.jwtAccessTokenHeaderName })
     @AdminPermission()
     public async updateProduct(
         @Param('id') id: string,
@@ -53,7 +54,7 @@ export class ProductsController {
     }
 
     @Delete(':id')
-    @ApiHeader({ name: 'x-access-token' })
+    @ApiHeader({ name: appConfiguration.jwtAccessTokenHeaderName })
     @AdminPermission()
     public deleteProduct(@Param('id') id: string): Promise<void> {
         return this.productsService.delete(id);

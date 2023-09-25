@@ -4,6 +4,7 @@ import { CategoryDto, UpdateCategoryDto } from '@interfaces/dtos/Category.dto';
 import { CategoriesService } from '@services/categories.service';
 import { AdminPermission } from '@root/roles.decorator';
 import { CreateCategoryDto } from '@DTOs/Category.dto';
+import { appConfiguration } from '@config/app.conf';
 
 @Controller("categories")
 @ApiTags("Categories")
@@ -26,7 +27,7 @@ export class CategoriesController {
     }
 
     @Post()
-    @ApiHeader({ name: 'x-access-token' })
+    @ApiHeader({ name: appConfiguration.jwtAccessTokenHeaderName })
     @AdminPermission()
     public async createCategory(@Body() createRequest: CreateCategoryDto): Promise<CategoryDto> {
         const category = await this.categoriesService.create(createRequest);
@@ -35,7 +36,7 @@ export class CategoriesController {
 
 
     @Put(':id')
-    @ApiHeader({ name: 'x-access-token' })
+    @ApiHeader({ name: appConfiguration.jwtAccessTokenHeaderName })
     @AdminPermission()
     public async updateCategory(
         @Param('id') id: string,
@@ -46,7 +47,7 @@ export class CategoriesController {
     }
 
     @Delete(':id')
-    @ApiHeader({ name: 'x-access-token' })
+    @ApiHeader({ name: appConfiguration.jwtAccessTokenHeaderName })
     @AdminPermission()
     public deleteCategory(@Param('id') id: string): Promise<void> {
         return this.categoriesService.delete(id);
