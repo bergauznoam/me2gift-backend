@@ -13,6 +13,8 @@ declare global {
             PASSWORD_SALT_ROUNDS: number;
             JTW_EXPIRY: string;
             JTW_SECRET: string;
+            APP_ADMIN_EMAIL: string;
+            APP_ADMIN_INITIAL_PASSWORD: string;
         }
     }
 }

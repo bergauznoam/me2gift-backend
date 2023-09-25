@@ -20,10 +20,13 @@ export class UsersService extends CRUDService(User) {
         let admin = await this.repository.findOne({ where: { isAdmin: true } });
         if (!admin) {
             admin = new User();
-            admin.email = "admin@me2gift.com";
-            admin.password = "admin"
+            admin.email = process.env.APP_ADMIN_EMAIL;
+            admin.password = process.env.APP_ADMIN_INITIAL_PASSWORD
             admin.isAdmin = true;
             await this.usersRepository.save(admin);
+            if (process.env.NODE_ENV !== 'development') {
+                this.resetPassword(admin.email);
+            }
         }
     }
 
@@ -37,6 +40,7 @@ export class UsersService extends CRUDService(User) {
             throw new InvalidUserPasswordError();
         }
         const payload = { sub: user.id };
+
         return await this.jwtService.signAsync(payload);
     }
 
