@@ -15,7 +15,7 @@ import { AppModule } from '@root/app.module';
 import { CustomExceptionFilter } from '@root/exception.filter';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   app.setGlobalPrefix('api', { exclude: ['docs'] });
   app.useGlobalFilters(new CustomExceptionFilter());
   app.useGlobalPipes(new ValidationPipe());
