@@ -10,7 +10,7 @@ services:
     depends_on:
       - database
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
   dev:
     image: me2gift/backend
     container_name: me2gift-dev
