@@ -9,5 +9,5 @@ WORKDIR /opt/me2gift
 RUN cp -rf /tmp/me2gift/dist/* /opt/me2gift && \
     mv /tmp/me2gift/node_modules /opt/me2gift && \
     rm -rf /tmp/me2gift
-EXPOSE 3000
+EXPOSE 3001
 ENTRYPOINT [ "node", "/opt/me2gift/main.js" ]
