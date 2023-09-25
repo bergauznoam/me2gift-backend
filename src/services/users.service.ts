@@ -35,8 +35,7 @@ export class UsersService extends CRUDService(User) {
         if (!user) {
             throw new InvalidUserPasswordError();
         }
-        const isMatch = await bcrypt.compare(password, user.password)
-        if (!isMatch) {
+        if (!user.isPasswordValid(password)) {
             throw new InvalidUserPasswordError();
         }
         const payload = { sub: user.id };
