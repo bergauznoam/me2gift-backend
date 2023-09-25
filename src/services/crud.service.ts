@@ -15,7 +15,12 @@ export function CRUDService<BaseModel>(entity: Constructor<BaseModel>): Type<ICR
         }
 
         public async getById(id: string): Promise<BaseModel> {
-            const model = await this.repository.findOne({ where: { id: +id } } as unknown as FindOneOptions<BaseModel>);
+            const model = await this.repository.findOne({
+                relations: this.relations,
+                where: {
+                    id: +id
+                }
+            } as unknown as FindOneOptions<BaseModel>);
             if (!model) {
                 throw new InvalidIdError();
             }
