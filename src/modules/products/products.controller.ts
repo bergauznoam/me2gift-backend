@@ -1,5 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { ApiHeader, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { ApiHeader, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { ProductsService } from '@services/products.service';
 import { ProductDto } from '@interfaces/dtos/Product.dto';
@@ -12,13 +12,23 @@ export class ProductsController {
     constructor(private readonly productsService: ProductsService) { }
 
     @Get()
-    public async getProducts(): Promise<ProductDto[]> {
-        const products = await this.productsService.get();
+    @ApiQuery({ name: 'categoryId', required: false, type: Number })
+    @ApiQuery({ name: 'subCategoryId', required: false, type: Number })
+    public async getProducts(
+        @Query('categoryId') categoryId?: number,
+        @Query('subCategoryId') subCategoryId?: number,
+    ): Promise<ProductDto[]> {
+        let products = []
+        if (!categoryId) {
+            products = await this.productsService.get();
+        } else {
+            products = await this.productsService.getByCategoryId(categoryId, subCategoryId)
+        }
         return products.map(p => p.format());
     }
 
     @Get(':id')
-    public async getProductById(@Param('id') id: string) {
+    public async getProductById(@Param('id') id: string): Promise<ProductDto> {
         const product = await this.productsService.getById(id);
         return product.format();
     }

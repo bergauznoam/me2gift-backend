@@ -15,7 +15,20 @@ export class ProductsService extends CRUDService(Product) {
         private subCatergoriesRepository: Repository<SubCategory>,
     ) {
         super();
-        super.relations = ["subCategory"];
+        super.relations = ["subCategory", "subCategory.category"];
+    }
+
+    public async getByCategoryId(categoryId: number, subCategoryId?: number): Promise<Product[]> {
+        let query = this.repository.createQueryBuilder("products")
+            .leftJoinAndSelect("products.subCategory", "subCategory")
+            .leftJoinAndSelect("subCategory.category", "category")
+            .where('category.id = :categoryId', { categoryId })
+
+        if (subCategoryId) {
+            query = query.andWhere('subCategory.id = :subCategoryId', { subCategoryId });
+        }
+
+        return query.select(['products']).getMany();
     }
 
     public async create(createRequest: CreateProductDto): Promise<Product> {
