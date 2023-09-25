@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
-import { CategoryDto } from '@interfaces/dtos/Category.dto';
+import { CategoryDto, UpdateCategoryDto } from '@interfaces/dtos/Category.dto';
 import { CategoriesService } from '@services/categories.service';
 import { AdminPermission } from '@root/roles.decorator';
 import { CreateCategoryDto } from '@DTOs/Category.dto';
@@ -28,8 +28,8 @@ export class CategoriesController {
     @Post()
     @ApiHeader({ name: 'x-access-token' })
     @AdminPermission()
-    public async createCategory(@Body() createCategoryRequest: CreateCategoryDto): Promise<CategoryDto> {
-        const category = await this.categoriesService.create(createCategoryRequest);
+    public async createCategory(@Body() createRequest: CreateCategoryDto): Promise<CategoryDto> {
+        const category = await this.categoriesService.create(createRequest);
         return category.format();
     }
 
@@ -39,9 +39,9 @@ export class CategoriesController {
     @AdminPermission()
     public async updateCategory(
         @Param('id') id: string,
-        @Body() createCategoryRequest: CreateCategoryDto
+        @Body() updateRequest: UpdateCategoryDto
     ): Promise<CategoryDto> {
-        const category = await this.categoriesService.update(id, createCategoryRequest);
+        const category = await this.categoriesService.update(id, updateRequest);
         return category.format();
     }
 

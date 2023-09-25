@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/
 import { ApiHeader, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { ProductsService } from '@services/products.service';
-import { ProductDto } from '@interfaces/dtos/Product.dto';
+import { ProductDto, UpdateProductDto } from '@DTOs/Product.dto';
 import { CreateProductDto } from '@DTOs/Product.dto';
 import { AdminPermission } from '@root/roles.decorator';
 
@@ -36,8 +36,8 @@ export class ProductsController {
     @Post()
     @ApiHeader({ name: 'x-access-token' })
     @AdminPermission()
-    public async createProduct(@Body() createProductRequest: CreateProductDto): Promise<ProductDto> {
-        const product = await this.productsService.create(createProductRequest);
+    public async createProduct(@Body() createRequest: CreateProductDto): Promise<ProductDto> {
+        const product = await this.productsService.create(createRequest);
         return product.format();
     }
 
@@ -46,9 +46,9 @@ export class ProductsController {
     @AdminPermission()
     public async updateProduct(
         @Param('id') id: string,
-        @Body() createProductRequest: CreateProductDto
+        @Body() updateRequest: UpdateProductDto
     ): Promise<ProductDto> {
-        const product = await this.productsService.update(id, createProductRequest);
+        const product = await this.productsService.update(id, updateRequest);
         return product.format();
     }
 

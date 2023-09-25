@@ -1,7 +1,7 @@
 import { SubCategoriesService } from '@services/subcategories.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
-import { SubCategoryDto } from '@DTOs/SubCategory.dto';
+import { SubCategoryDto, UpdateSubCategory } from '@DTOs/SubCategory.dto';
 import { CreateSubCategory } from '@DTOs/SubCategory.dto';
 import { AdminPermission } from '@root/roles.decorator';
 
@@ -29,9 +29,9 @@ export class SubCategoriesController {
     @ApiHeader({ name: 'x-access-token' })
     @AdminPermission()
     public async createSubCategory(
-        @Body() createSubCategoryRequest: CreateSubCategory
+        @Body() createRequest: CreateSubCategory
     ): Promise<SubCategoryDto> {
-        const subCategory = await this.subCategoriesService.create(createSubCategoryRequest);
+        const subCategory = await this.subCategoriesService.create(createRequest);
         return subCategory.format()
     }
 
@@ -40,9 +40,9 @@ export class SubCategoriesController {
     @AdminPermission()
     public async updateSubcategory(
         @Param('id') id: string,
-        @Body() createSubCategoryRequest: CreateSubCategory
+        @Body() updateRequest: UpdateSubCategory
     ): Promise<SubCategoryDto> {
-        const subCategory = await this.subCategoriesService.update(id, createSubCategoryRequest);
+        const subCategory = await this.subCategoriesService.update(id, updateRequest);
         return subCategory.format()
     }
 
