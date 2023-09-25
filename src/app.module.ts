@@ -24,7 +24,7 @@ import { SubCategoriesModule } from '@subcategories/subcategories.module';
     JwtModule.register({
       global: true,
       secret: appConfiguration.jwtSecret,
-      signOptions: { expiresIn: '60m' },
+      signOptions: { expiresIn: appConfiguration.jwtExpiry },
     }),
     UsersModule,
     ProductsModule,

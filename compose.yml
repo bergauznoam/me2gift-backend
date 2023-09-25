@@ -9,6 +9,8 @@ services:
       - 3000:3000
     depends_on:
       - database
+    environment:
+      - NODE_ENV=production
   dev:
     image: me2gift/backend
     container_name: me2gift-dev
@@ -20,6 +22,8 @@ services:
       - database
     volumes:
       - .:/tmp/me2gift
+    environment:
+      - NODE_ENV=development
     entrypoint: ['/bin/bash']
   database:
     image: postgres:16

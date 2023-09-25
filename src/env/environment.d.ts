@@ -2,8 +2,8 @@ declare global {
     namespace NodeJS {
         interface ProcessEnv {
             NODE_ENV: 'development' | 'production';
-            PORT?: string;
-            DATABASE_CONNECTION: string;
+            PORT: string;
+            DATABASE_CONNECTION: "mysql" | "mariadb" | "postgres" | "cockroachdb" | "sqlite" | "mssql" | "mongodb";
             DATABASE_NAME: string;
             DATABASE_HOST: string;
             DATABASE_USERNAME: string;
@@ -11,6 +11,7 @@ declare global {
             DATABASE_PORT: number;
             DATABASE_ENABLE_LOGGING: string;
             PASSWORD_SALT_ROUNDS: number;
+            JTW_EXPIRY: string;
             JTW_SECRET: string;
         }
     }
