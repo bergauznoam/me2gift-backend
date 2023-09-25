@@ -1,7 +1,8 @@
 import {
     Entity,
     Column,
-    BeforeInsert
+    BeforeInsert,
+    Unique
 } from 'typeorm';
 import {
     IsEmail,
@@ -17,6 +18,7 @@ import { BaseModel } from "@models/_base.model";
 import { UserDto } from '@DTOs/User.dto';
 
 @Entity({ name: "users" })
+@Unique('email_unique_constraint', ['email'])
 export class User extends BaseModel {
     @Column()
     @IsString()
@@ -56,6 +58,10 @@ export class User extends BaseModel {
             createdAt: this.createdAt,
             updatedAt: this.updatedAt,
         }
+    }
+
+    public async isPasswordValid(password: string): Promise<boolean> {
+        return await bcrypt.compare(password, this.password);
     }
 
     public updatePassword(password: string): void {
