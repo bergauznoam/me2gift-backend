@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import * as dotenv from "dotenv";
-console.log(resolve(__dirname, `./env/${process.env.NODE_ENV || 'development'}.env`))
+
 dotenv.config({
   path: resolve(__dirname, `./env/${process.env.NODE_ENV || 'development'}.env`),
   processEnv: process.env,
