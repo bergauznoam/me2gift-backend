@@ -6,7 +6,7 @@ import { Category } from '@models/category.model';
 import { SubCategory } from '@models/subcategory.model';
 
 export const databaseConnection: Partial<TypeOrmModuleOptions> = {
-    type: process.env.DATABASE_CONNECTION,
+    type: 'postgres',
     host: process.env.DATABASE_HOST,
     port: process.env.DATABASE_PORT,
     username: process.env.DATABASE_USERNAME,

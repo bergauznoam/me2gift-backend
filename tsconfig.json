@@ -20,10 +20,11 @@
     "paths": {
       "@config/*": ["./src/configurations/*"],
       "@guards/*": ["./src/guards/*"],
+      "@DTOs/*": ["./src/interfaces/dtos/*"],
+
       "@interfaces/*": ["./src/interfaces/*"],
       "@models/*": ["./src/models/*"],
       "@services/*": ["./src/services/*"],
-      "@DTOs/*": ["./src/interfaces/dtos/*"],
 
       "@users/*": ["./src/modules/users/*"],
       "@categories/*": ["./src/modules/categories/*"],
