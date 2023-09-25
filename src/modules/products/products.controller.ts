@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
 
 import { ProductsService } from '@services/products.service';
@@ -12,13 +12,13 @@ export class ProductsController {
     constructor(private readonly productsService: ProductsService) { }
 
     @Get()
-    public async getAllProducts(): Promise<ProductDto[]> {
+    public async getProducts(): Promise<ProductDto[]> {
         const products = await this.productsService.get();
         return products.map(p => p.format());
     }
 
     @Get(':id')
-    public async getProduct(@Param('id') id: string) {
+    public async getProductById(@Param('id') id: string) {
         const product = await this.productsService.getById(id);
         return product.format();
     }
@@ -31,7 +31,7 @@ export class ProductsController {
         return product.format();
     }
 
-    @Post(':id')
+    @Put(':id')
     @ApiHeader({ name: 'x-access-token' })
     @AdminPermission()
     public async updateProduct(

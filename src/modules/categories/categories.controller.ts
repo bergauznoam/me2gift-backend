@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
 import { CategoryDto } from '@interfaces/dtos/Category.dto';
 import { CategoriesService } from '@services/categories.service';
@@ -35,7 +35,7 @@ export class CategoriesController {
     }
 
 
-    @Post(':id')
+    @Put(':id')
     @ApiHeader({ name: 'x-access-token' })
     @AdminPermission()
     public async updateCategory(
