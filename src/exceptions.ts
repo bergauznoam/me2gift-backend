@@ -4,6 +4,12 @@ export class InvalidUserPasswordError extends Error {
     }
 }
 
+export class InvalidUser extends Error {
+    constructor() {
+        super("Invalid user");
+    }
+}
+
 export class InvalidIdError extends Error {
     constructor() {
         super(`Invalid id`);

@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsEmail, IsNumberString } from 'class-validator';
 import { BaseModelDto } from "./base.dto";
 
 export class UserDto extends BaseModelDto {
@@ -7,7 +7,7 @@ export class UserDto extends BaseModelDto {
 }
 
 export class LoginDto {
-    @IsString()
+    @IsEmail()
     @IsNotEmpty()
     email: string;
 
@@ -15,3 +15,12 @@ export class LoginDto {
     @IsNotEmpty()
     password: string;
 }
+
+export class ResetPasswordDto {
+    @IsEmail()
+    @IsNotEmpty()
+    email: string;
+
+    @IsNumberString()
+    code?: string;
+} 

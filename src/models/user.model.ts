@@ -8,6 +8,7 @@ import {
     IsNotEmpty,
     IsString,
     IsBoolean,
+    IsNumberString,
 } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 
@@ -32,6 +33,14 @@ export class User extends BaseModel {
     @IsBoolean()
     isAdmin: boolean;
 
+    @Column({ nullable: true })
+    @IsString()
+    resetToken: string;
+
+    @Column({ nullable: true })
+    @IsNumberString()
+    otpCode: string;
+
     @BeforeInsert()
     async hashPassword(): Promise<void> {
         const salt = await bcrypt.genSalt(appConfiguration.saltRounds);
@@ -47,5 +56,21 @@ export class User extends BaseModel {
             createdAt: this.createdAt,
             updatedAt: this.updatedAt,
         }
+    }
+
+    public updatePassword(password: string): void {
+        this.password = password;
+        this.resetToken = null;
+        this.otpCode = null;
+    }
+
+    public updateOTPCode(code: string): void {
+        this.otpCode = code;
+        this.resetToken = null;
+    }
+
+    public updateResetToken(token: string): void {
+        this.resetToken = token;
+        this.otpCode = null;
     }
 }
