@@ -1,4 +1,4 @@
-import { CreateCategoryDto } from '../interfaces/dtos/CreateCategory.dto';
+import { CreateCategoryDto, UpdateCategoryDto } from '@DTOs/Category.dto';
 import { Injectable } from "@nestjs/common";
 
 import { CRUDService } from "@services/crud.service";
@@ -12,16 +12,16 @@ export class CategoriesService extends CRUDService(Category) {
         super.relations = ["subCategories"]
     }
 
-    public async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
+    public async create(createRequest: CreateCategoryDto): Promise<Category> {
         const category = new Category();
-        category.name = createCategoryDto.name;
+        category.name = createRequest.name;
         await this.repository.save(category);
         return category;
     }
 
-    public async update(id: string, createCategoryDto: CreateCategoryDto): Promise<Category> {
+    public async update(id: string, updateRequest: UpdateCategoryDto): Promise<Category> {
         const category = await this.getById(id);
-        category.name = createCategoryDto.name;
+        category.name = updateRequest.name;
         await this.repository.save(category);
         return category;
     }

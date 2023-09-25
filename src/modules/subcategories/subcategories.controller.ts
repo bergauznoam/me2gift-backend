@@ -2,7 +2,7 @@ import { SubCategoriesService } from '@services/subcategories.service';
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { SubCategoryDto } from '@DTOs/SubCategory.dto';
-import { CreateSubCategory } from '@DTOs/CreateSubCategory.dto';
+import { CreateSubCategory } from '@DTOs/SubCategory.dto';
 
 @Controller("subcategories")
 @ApiTags("SubCategories")
@@ -29,5 +29,13 @@ export class SubCategoriesController {
         @Body() createSubCategoryRequest: CreateSubCategory
     ): Promise<SubCategoryDto> {
         return this.subCategoriesService.create(createSubCategoryRequest);
+    }
+
+    @Post(':id')
+    public async updateSubcategory(
+        @Param('id') id: string,
+        @Body() createSubCategoryRequest: CreateSubCategory
+    ): Promise<SubCategoryDto> {
+        return this.subCategoriesService.update(id, createSubCategoryRequest);
     }
 }

@@ -3,7 +3,7 @@ import { ApiHeader, ApiTags } from '@nestjs/swagger';
 
 import { ProductsService } from '@services/products.service';
 import { ProductDto } from '@interfaces/dtos/Product.dto';
-import { CreateProductDto } from '@interfaces/dtos/CreateProduct.dto';
+import { CreateProductDto } from '@DTOs/Product.dto';
 import { AdminPermission } from '@root/roles.decorator';
 
 @Controller("products")
