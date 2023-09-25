@@ -7,3 +7,6 @@
 3. `cd me2gift-backend`
 4. `docker compose build backend`
 5. `docker compose up backend -d`
+
+Swagger Documentation: http://localhost:3001/docs
+API Endpoint: http://localhost:3001/api

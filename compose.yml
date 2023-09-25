@@ -6,7 +6,7 @@ services:
     container_name: me2gift
     build: .
     ports:
-      - 3000:3000
+      - 3001:3001
     depends_on:
       - database
     environment:
@@ -17,7 +17,7 @@ services:
     build: .
     tty: true
     ports:
-      - 3000:3000
+      - 3001:3001
     depends_on:
       - database
     volumes:
