@@ -14,23 +14,20 @@ export class SubCategoriesController {
     @Get()
     public async getSubcategories(): Promise<SubCategoryDto[]> {
         const subCategories = await this.subCategoriesService.get();
-        return subCategories.map(sub => ({ ...sub, categoryId: sub.category.id }));
+        return subCategories.map(sub => sub.format());
     }
 
     @Get(':id')
     public async getSubcategory(
         @Param('id') id: string
     ): Promise<SubCategoryDto> {
-        const subCategories = await this.subCategoriesService.getById(id);
-        return { ...subCategories, categoryId: subCategories.category.id };
+        return this.subCategoriesService.getById(id);
     }
 
     @Post()
     public async createSubCategory(
         @Body() createSubCategoryRequest: CreateSubCategory
     ): Promise<SubCategoryDto> {
-        const subCategory = await this.subCategoriesService.create(createSubCategoryRequest);
-        const subCategoryResponse: SubCategoryDto = { ...subCategory, categoryId: subCategory.category.id };
-        return subCategoryResponse;
+        return this.subCategoriesService.create(createSubCategoryRequest);
     }
 }

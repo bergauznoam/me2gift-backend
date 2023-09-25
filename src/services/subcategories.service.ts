@@ -13,7 +13,10 @@ export class SubCategoriesService extends CRUDService(SubCategory) {
     constructor(
         @InjectRepository(Category)
         private catergoriesRepository: Repository<Category>,
-    ) { super(); }
+    ) {
+        super();
+        super.relations = ["category", "products"];
+    }
 
     public async create(createRequest: CreateSubCategory): Promise<SubCategory> {
         const category = await this.catergoriesRepository.findOne({ where: { id: createRequest.categoryId } });

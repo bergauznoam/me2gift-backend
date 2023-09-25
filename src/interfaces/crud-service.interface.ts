@@ -8,6 +8,7 @@ export type Constructor<T> = new (...args: any[]) => T;
 
 export interface ICRUDService<T> {
     readonly repository: Repository<T>;
+    relations: string[];
     get(filter?: ICRUDFilters<T>): Promise<T[]>;
     getById(id: string): Promise<T>;
     create(createRequest: Record<string, any>): Promise<T>;

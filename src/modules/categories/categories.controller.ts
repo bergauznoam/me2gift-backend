@@ -14,31 +14,36 @@ export class CategoriesController {
     ) { }
 
     @Get()
-    public getCategories(): Promise<CategoryDto[]> {
-        return this.categoriesService.get();
+    public async getCategories(): Promise<CategoryDto[]> {
+        const categories = await this.categoriesService.get();
+        console.log(categories)
+        return categories.map(c => c.format());
     }
 
     @Get(':id')
-    public getCategoryById(@Param('id') id: string): Promise<CategoryDto> {
-        return this.categoriesService.getById(id);
+    public async getCategoryById(@Param('id') id: string): Promise<CategoryDto> {
+        const category = await this.categoriesService.getById(id);
+        return category.format();
     }
 
     @Post()
     @ApiHeader({ name: 'x-access-token' })
     @AdminPermission()
-    public createCategory(@Body() createCategoryRequest: CreateCategoryDto): Promise<CategoryDto> {
-        return this.categoriesService.create(createCategoryRequest);
+    public async createCategory(@Body() createCategoryRequest: CreateCategoryDto): Promise<CategoryDto> {
+        const category = await this.categoriesService.create(createCategoryRequest);
+        return category.format();
     }
 
 
     @Post(':id')
     @ApiHeader({ name: 'x-access-token' })
     @AdminPermission()
-    public updateCategory(
+    public async updateCategory(
         @Param('id') id: string,
         @Body() createCategoryRequest: CreateCategoryDto
     ): Promise<CategoryDto> {
-        return this.categoriesService.update(id, createCategoryRequest);
+        const category = await this.categoriesService.update(id, createCategoryRequest);
+        return category.format();
     }
 
     @Delete(':id')

@@ -13,7 +13,10 @@ export class ProductsService extends CRUDService(Product) {
     constructor(
         @InjectRepository(SubCategory)
         private subCatergoriesRepository: Repository<SubCategory>,
-    ) { super(); }
+    ) {
+        super();
+        super.relations = ["subCategory"];
+    }
 
     public async create(createProductRequest: CreateProductDto): Promise<Product> {
         const subCategory = await this.subCatergoriesRepository.findOne({

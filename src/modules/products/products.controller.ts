@@ -12,30 +12,34 @@ export class ProductsController {
     constructor(private readonly productsService: ProductsService) { }
 
     @Get()
-    public getAllProducts(): Promise<ProductDto[]> {
-        return this.productsService.get();
+    public async getAllProducts(): Promise<ProductDto[]> {
+        const products = await this.productsService.get();
+        return products.map(p => p.format());
     }
 
     @Get(':id')
-    public getProduct(@Param('id') id: string) {
-        return this.productsService.getById(id);
+    public async getProduct(@Param('id') id: string) {
+        const product = await this.productsService.getById(id);
+        return product.format();
     }
 
     @Post()
     @ApiHeader({ name: 'x-access-token' })
     @AdminPermission()
-    public createProduct(@Body() createProductRequest: CreateProductDto): Promise<ProductDto> {
-        return this.productsService.create(createProductRequest);
+    public async createProduct(@Body() createProductRequest: CreateProductDto): Promise<ProductDto> {
+        const product = await this.productsService.create(createProductRequest);
+        return product.format();
     }
 
     @Post(':id')
     @ApiHeader({ name: 'x-access-token' })
     @AdminPermission()
-    public updateProduct(
+    public async updateProduct(
         @Param('id') id: string,
         @Body() createProductRequest: CreateProductDto
     ): Promise<ProductDto> {
-        return this.productsService.update(id, createProductRequest);
+        const product = await this.productsService.update(id, createProductRequest);
+        return product.format();
     }
 
     @Delete(':id')

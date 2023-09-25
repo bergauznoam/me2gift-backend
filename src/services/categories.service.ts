@@ -7,6 +7,11 @@ import { Category } from "@models/category.model";
 @Injectable()
 export class CategoriesService extends CRUDService(Category) {
 
+    constructor() {
+        super();
+        super.relations = ["subCategories"]
+    }
+
     public async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
         const category = new Category();
         category.name = createCategoryDto.name;

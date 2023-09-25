@@ -1,10 +1,8 @@
 import {
     Entity,
     Column,
-    CreateDateColumn,
-    UpdateDateColumn,
     Unique,
-    ManyToOne
+    ManyToOne,
 } from 'typeorm';
 import {
     IsNotEmpty,
@@ -14,6 +12,7 @@ import {
 } from 'class-validator';
 import { BaseModel } from "@models/_base.model";
 import { SubCategory } from '@models/subcategory.model';
+import { ProductDto } from '@DTOs/Product.dto';
 
 @Entity({ name: "products" })
 @Unique("name_subcategory_unique_constraint", ["name", "subCategory"])
@@ -28,9 +27,22 @@ export class Product extends BaseModel {
     @Min(0)
     price: number;
 
-    @Column({ nullable: true })
+    @Column({ default: "" })
+    @IsString()
     description: string;
 
     @ManyToOne(type => SubCategory, subCategory => subCategory.products)
     subCategory: SubCategory;
+
+    public format(): ProductDto {
+        return {
+            id: this.id,
+            name: this.name,
+            description: this.description,
+            price: this.price,
+            createdAt: this.createdAt,
+            updatedAt: this.updatedAt,
+            subCategory: this.subCategory?.format(),
+        }
+    }
 }
