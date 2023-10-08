@@ -44,6 +44,7 @@ export class ProductsService extends CRUDService(Product) {
             product.description = createRequest.description;
             product.price = createRequest.price;
             product.subCategory = subCategory;
+            product.imageUrl = createRequest.imageUrl;
             await this.repository.save(product);
             return product;
         } catch (e) {
