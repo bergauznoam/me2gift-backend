@@ -7,7 +7,7 @@ export class ProductDto extends BaseModelDto {
     name: string;
     price: number;
     description: string;
-    image_url: string;
+    imageUrl: string;
     subCategory: SubCategoryDto;
 }
 
@@ -34,7 +34,7 @@ export class CreateProductDto {
 
     @IsNotEmpty()
     @IsUrl()
-    image_url: string;
+    imageUrl: string;
 }
 
 export class UpdateProductDto {
@@ -51,5 +51,5 @@ export class UpdateProductDto {
 
     @IsNotEmpty()
     @IsUrl()
-    image_url: string;
+    imageUrl: string;
 }

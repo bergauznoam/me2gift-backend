@@ -34,7 +34,7 @@ export class Product extends BaseModel {
 
     @Column()
     @IsUrl()
-    image_url: string;
+    imageUrl: string;
 
     @ManyToOne(type => SubCategory, subCategory => subCategory.products)
     subCategory: SubCategory;
@@ -45,7 +45,7 @@ export class Product extends BaseModel {
             name: this.name,
             description: this.description,
             price: this.price,
-            image_url: this.image_url,
+            imageUrl: this.imageUrl,
             createdAt: this.createdAt,
             updatedAt: this.updatedAt,
             subCategory: this.subCategory?.format(),
