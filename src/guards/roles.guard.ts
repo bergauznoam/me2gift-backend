@@ -23,7 +23,8 @@ export class RolesGuard implements CanActivate {
             return true;
         }
         const request = context.switchToHttp().getRequest();
-        const accessToken = request.headers[appConfiguration.jwtAccessTokenHeaderName];
+        const accessToken = request.headers[appConfiguration.jwtAccessTokenHeaderName.toLowerCase()] ||
+            request.headers[appConfiguration.jwtAccessTokenHeaderName];
         if (!accessToken) {
             return false;
         }
