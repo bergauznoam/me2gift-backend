@@ -8,7 +8,8 @@ import {
     IsNotEmpty,
     IsString,
     IsNumber,
-    Min
+    Min,
+    IsUrl
 } from 'class-validator';
 import { BaseModel } from "@models/_base.model";
 import { SubCategory } from '@models/subcategory.model';
@@ -31,6 +32,10 @@ export class Product extends BaseModel {
     @IsString()
     description: string;
 
+    @Column()
+    @IsUrl()
+    image_url: string;
+
     @ManyToOne(type => SubCategory, subCategory => subCategory.products)
     subCategory: SubCategory;
 
@@ -40,6 +45,7 @@ export class Product extends BaseModel {
             name: this.name,
             description: this.description,
             price: this.price,
+            image_url: this.image_url,
             createdAt: this.createdAt,
             updatedAt: this.updatedAt,
             subCategory: this.subCategory?.format(),

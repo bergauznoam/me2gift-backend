@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString, Min } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString, IsUrl, Min } from "class-validator";
 import { SubCategoryDto } from "./SubCategory.dto";
 import { BaseModelDto } from "./base.dto";
 import { ICRUDFilters } from "@interfaces/crud-service.interface";
@@ -7,6 +7,7 @@ export class ProductDto extends BaseModelDto {
     name: string;
     price: number;
     description: string;
+    image_url: string;
     subCategory: SubCategoryDto;
 }
 
@@ -30,6 +31,10 @@ export class CreateProductDto {
     @IsNumber()
     @IsNotEmpty()
     subCategoryId: number;
+
+    @IsNotEmpty()
+    @IsUrl()
+    image_url: string;
 }
 
 export class UpdateProductDto {
@@ -43,4 +48,8 @@ export class UpdateProductDto {
     @IsNumber()
     @Min(0)
     price: number;
+
+    @IsNotEmpty()
+    @IsUrl()
+    image_url: string;
 }
