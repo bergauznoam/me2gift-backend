@@ -30,6 +30,7 @@
       "@categories/*": ["./src/modules/categories/*"],
       "@subcategories/*": ["./src/modules/subcategories/*"],
       "@products/*": ["./src/modules/products/*"],
+      "@orders/*": ["./src/modules/orders/*"],
 
       "@root/*": ["./src/*"],
 
