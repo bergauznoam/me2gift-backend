@@ -60,7 +60,7 @@ export class OrdersController {
     @Delete(':id')
     @ApiHeader({ name: appConfiguration.jwtAccessTokenHeaderName })
     @AdminPermission()
-    public deleteCategory(@Param('id') id: string): Promise<void> {
+    public deleteOrder(@Param('id') id: string): Promise<void> {
         return this.ordersService.delete(id);
     }
 }
