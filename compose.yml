@@ -22,8 +22,11 @@ services:
       - database
     volumes:
       - .:/tmp/me2gift
+    working_dir: /tmp/me2gift
     environment:
       - NODE_ENV=development
+      - DATABASE_ENABLE_LOGGING=false
+      - JTW_EXPIRY=9999m
     entrypoint: ['/bin/bash']
   database:
     image: postgres:16

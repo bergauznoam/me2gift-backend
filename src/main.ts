@@ -1,12 +1,3 @@
-import { resolve } from 'path';
-import * as dotenv from "dotenv";
-
-dotenv.config({
-  path: resolve(__dirname, `./env/${process.env.NODE_ENV || 'development'}.env`),
-  processEnv: process.env,
-  override: false
-});
-
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';

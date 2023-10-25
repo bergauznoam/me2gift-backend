@@ -32,8 +32,7 @@
       "@products/*": ["./src/modules/products/*"],
       "@orders/*": ["./src/modules/orders/*"],
 
-      "@root/*": ["./src/*"],
-
+      "@root/*": ["./src/*"]
     }
   }
 }
