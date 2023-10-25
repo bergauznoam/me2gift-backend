@@ -56,6 +56,7 @@ export class ProductsService extends CRUDService(Product) {
         const product = await this.getById(id);
         product.description = updateRequest.description;
         product.price = updateRequest.price;
+        product.imageUrl = updateRequest.imageUrl;
         await this.repository.save(product);
         return product;
     }
